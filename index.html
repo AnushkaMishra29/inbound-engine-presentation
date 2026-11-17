@@ -1036,7 +1036,7 @@ body::before{background:none}
 .lp .mt .bars u{display:block;width:clamp(22px,3vw,40px);border-radius:6px 6px 0 0;background:linear-gradient(180deg,#F6A73C,#EE7614);text-decoration:none}
 .lp .mt p{margin:0;font-size:clamp(14px,2.3vh,20px);color:#fff;max-width:520px;line-height:1.3}.lp .mt p b{color:#F6A73C}
 @media(max-width:900px){.lp .lr{grid-template-columns:1fr}.lp .ar{width:4px;height:18px;justify-self:center;margin:2px 0;transform:rotate(90deg)}.lp .back{display:none}}
-</style>
+#dnotesbtn,#dnotes{display:none!important}</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -1855,23 +1855,23 @@ const BRING = [["Frame it", "Turned an unclear brief into recorded decisions, ea
 const MCOL = ["#3E74B0", "#14406F", "#2E8B6F", "#166A47"];
 const FEDGES = ["M60 170 H400", "M400 170 C480 170,500 60,590 60", "M400 170 H590", "M400 170 C480 170,500 280,590 280", "M590 60 H930", "M590 170 H930"];
 const DECK = [
-  { id: "title", dark: true, t: "Title", mins: 0.5, notes: NOTE("Hi everyone, I'm (say your name). For my capstone I built an inbound engine for propelon.ai.", "The idea in one sentence: when someone writes to Propelon, they get a careful, prepared reply within one business day, and a person always presses send.", "These six steps are one message's journey: it arrives, we find the company, send it to the right person, write a summary and a draft, check it is safe, and a human sends it. I'll show you why it matters, and then I'll ask you to try to break it."),
+  { id: "title", dark: true, t: "Title", mins: 0.5, notes: NOTE(),
     html: () => `<div class="tgrid"><div class="tleft"><span class="kicker">Capstone project · built for Propelon</span><h1 class="dh big">${words("Inbound Engine: every enquiry answered in one day")}</h1>
       <div class="tmeta"><b>${esc(P.name || "YOUR NAME")}</b>${(P.role || P.headline) ? `<span>${esc(P.role || P.headline)}</span>` : ""}</div></div>
       <div class="tphoto" aria-label="${P.photo ? "Presenter photo" : "Photo placeholder"}">${P.photo ? `<img src="${esc(P.photo)}" alt="${esc(P.name || "Presenter")}">` : `<span>your face here<br>:)</span>`}</div></div>
       <svg class="dribbon" viewBox="0 0 1000 150" aria-hidden="true">${ribbonMarkup()}</svg>` },
-  { id: "problem", hide: true, t: "The business problem", mins: 1, notes: NOTE("Open with the problem, not the build. Three pressures meet: a rebuilt website about to send its first real enquiries, senior buyers who compare vendors on speed and accuracy, and a time-boxed engagement.", "Then the framing line: Propelon sells accountability for AI value, so its own front door should be just as accountable. That is the whole brief in one sentence.", "Do not quote a volume or a revenue figure."),
+  { id: "problem", hide: true, t: "The business problem", mins: 1, notes: NOTE(),
     html: () => `<span class="kicker">Slide 2 · The business problem</span><h2 class="dh">${words("A first impression, with no process behind it.")}</h2>
       <div class="card conv" style="padding:16px 20px;margin:6px 0 16px"><svg viewBox="0 0 960 270" role="img" aria-label="Three pressures converge on now: a rebuilt website going live, senior buyers comparing vendors on speed and accuracy, and a time-boxed engagement.">${CONVK}</svg></div>
       <p class="dsub" style="margin:0"><b>Propelon sells accountability for AI value.</b> Its own front door should be just as accountable.</p>`,
     mount() { setTimeout(() => { const c = $(".dslide .conv"); if (c) c.classList.add("in"); }, 200); } },
-  { id: "forwho", hide: true, t: "Who it serves", mins: 1.5, notes: NOTE("Say plainly that this was built for a real company and the people in it. Click each person: the engine gives them something concrete and never does certain things to them.", "Land on the line at the bottom: one promise across all five, a reviewed reply within one business day. It is a service target, not a result."),
+  { id: "forwho", hide: true, t: "Who it serves", mins: 1.5, notes: NOTE(),
     html: () => `<span class="kicker">Slide 3 · Who it serves</span><h2 class="dh">${words("Five people, one shared system.")}</h2>
       <div class="roles"><div class="rlist" id="krl">${ROLES.map((r, i) => `<button class="rbtn" data-th="role" data-v="${i}" aria-pressed="${i === 0}"><span class="badge b-${["accent", "teal", "amber", "teal"][i]}">${ic(r.icon)}</span>${r.name}</button>`).join("")}</div><div class="card rpane krule" id="krp"></div></div>
       <p class="dsub" style="margin:18px 0 0">One promise across all five: <b>a reviewed reply within one business day.</b></p>`,
     mount() { KD.drawRoleK = (i) => { const r = ROLES[i], p = $("#krp"); $$("#krl .rbtn").forEach((b) => b.setAttribute("aria-pressed", +b.dataset.i === i || +b.dataset.v === i));
         p.innerHTML = `<h3>${esc(r.name)}</h3><ul class="rk">${r.gets.slice(0, 2).map((x) => `<li>${esc(x)}</li>`).join("")}</ul><div class="rsig"><b>The signal they can trust.</b> ${esc(r.signal)}</div>`; p.style.animation = "none"; void p.offsetHeight; p.style.animation = ""; }; KD.drawRoleK(0); } },
-  { id: "theory", hide: true, t: "My theory", mins: 1.5, notes: NOTE("Say the theory in one breath: know more, decide by rules, say only what is true, and let a person send. Then click each move, or press Play.", "The contrast at the bottom is the point. Most builds score a lead, write an email and send it. This one adds knowledge before the decision, and a check and a person after it.", "This is my synthesis of the principles recorded in the company brain and the decision register. The four lines live in MOVES in the page source if you want to word them differently."),
+  { id: "theory", hide: true, t: "My theory", mins: 1.5, notes: NOTE(),
     html: () => `<span class="kicker">Slide 2 · My theory</span><h2 class="dh">${words("A good first reply takes four moves, in this order.")}</h2>
       <div class="moves" id="kmoves">${MOVES.map(([t, icn], i) => `${i ? '<span class="cn" aria-hidden="true"><svg viewBox="0 0 46 12"><line x1="2" y1="6" x2="44" y2="6" class="pth flowing"/></svg></span>' : ""}<button class="mv" data-th="move" data-v="${i}" aria-pressed="${i === 0}" style="--mc:${MCOL[i]}"><i class="mn">${i + 1}</i><span class="mi">${ic(icn)}</span><b>${t}</b></button>`).join("")}</div>
       <div class="mvd" id="kmvd" aria-live="polite"></div>
@@ -1879,7 +1879,7 @@ const DECK = [
       <div class="vs"><div class="vr"><small>Most builds</small>${["Score the lead", "Write an email", "Send"].map((x) => `<em>${x}</em>`).join("<u>→</u>")}</div><div class="vr on"><small>This build</small>${MOVES.map((m) => `<em>${m[0]}</em>`).join("<u>→</u>")}</div></div>`,
     mount() { KD.drawMove = (i) => { $$("#kmoves .mv").forEach((b, k) => { b.setAttribute("aria-pressed", k === i); b.classList.toggle("done", k < i); }); const m = MOVES[i], d = $("#kmvd"); d.innerHTML = `<b>${esc(m[2])}</b><p>${esc(m[3])}</p>`; d.style.animation = "none"; void d.offsetHeight; d.style.animation = ""; };
       KD.playMoves = () => { KD.fT.forEach(clearTimeout); KD.fT = []; MOVES.forEach((_, i) => KD.fT.push(setTimeout(() => KD.drawMove(i), i * 2600))); }; KD.drawMove(0); } },
-  { id: "follow", hide: true, t: "Follow one enquiry", mins: 2, notes: NOTE("Let the room choose. Start with the demo request, then the pricing question: watch the third move make sure no price is stated.", "Then the very senior executive: the engine steps back and a person replies. Finish on the account that said no: their wish wins even when they write first.", "These run through the same rules as the live engine."),
+  { id: "follow", hide: true, t: "Follow one enquiry", mins: 2, notes: NOTE(),
     html: () => `<span class="kicker">Slide 3 · The theory, in action</span><h2 class="dh">${words("Pick an enquiry. Watch it travel.")}</h2>
       <div class="chips" id="kfch" style="margin:6px 0 4px">${FOLLOW.map(([, l], i) => `<button class="chip" data-th="fol" data-v="${i}" aria-pressed="false">${l}</button>`).join("")}<button class="chip" data-th="folreplay" style="margin-left:auto">↻ Replay</button></div>
       <div class="card fol"><svg id="kfol" viewBox="0 0 1000 340" role="img" aria-label="An enquiry travels through the four moves and ends in one of three outcomes: a draft a person sends, a personal reply by a person, or excluded."></svg></div>
@@ -1899,16 +1899,16 @@ const DECK = [
         path.forEach((k, n) => KD.fT.push(setTimeout(() => { env.style.transform = `translate(${FNODES[k][0]}px,${FNODES[k][1]}px)`; $("#fn-" + k).classList.add("on");
           const c = $("#kfcap"); c.innerHTML = `<b>${esc(cap[k][0])}</b><p>${esc(cap[k][1])}</p>`; c.style.animation = "none"; void c.offsetHeight; c.style.animation = ""; }, 250 + n * 1600)));
       }; KD.runFollow(0); } },
-  { id: "model", hide: true, t: "Built the way Propelon sells", mins: 1.5, notes: NOTE("This is the slide that ties the project to the company. Propelon's own ideas, one row each: gates that can refuse, people decide and agents do the work, a record that stays open, one number you can stand behind.", "Say clearly that this is not a claim that the engine is the product. It is the same discipline, applied at small scale to the company's own front door.", "The last row is honest on purpose: the one number is a service target, and no real enquiry has flowed yet."),
+  { id: "model", hide: true, t: "Built the way Propelon sells", mins: 1.5, notes: NOTE(),
     html: () => `<span class="kicker">Slide 6 · Built the way Propelon sells</span><h2 class="dh">${words("Propelon's own model, applied to its own front door.")}</h2>
       <div class="pmodel">${PMODEL.map(([a, icn, b], i) => `<div class="prow" style="--i:${i}"><div class="pl">${ic(icn)}${a}</div><div class="pa" aria-hidden="true"><svg viewBox="0 0 40 12"><line x1="2" y1="6" x2="38" y2="6" class="pth flowing"/></svg></div><div class="pr">${b}</div></div>`).join("")}</div>
       <p class="dsub" style="margin:18px 0 0">Not a claim that the engine is the product. <b>The same discipline, at small scale.</b></p>` },
-  { id: "outbound", hide: true, t: "Two engines, one board", mins: 1.5, notes: NOTE("Show that inbound is not an island. The outbound engineer works a shared board. Pick a situation and watch what reaches them.", "Light browsing: nothing. Active evaluation: a row, labelled as an estimate. A target account writes in: it stays theirs, and they are told.", "The scores use the engine's own scoring code."),
+  { id: "outbound", hide: true, t: "Two engines, one board", mins: 1.5, notes: NOTE(),
     html: () => `<span class="kicker">Slide 7 · Beyond inbound</span><h2 class="dh">${words("Inbound tells outbound when it matters, and when not to.")}</h2>
       <div class="chips" id="kxch" style="margin:4px 0 6px">${[0, 1, 2].map((i) => `<button class="chip" data-th="x" data-v="${i}" aria-pressed="false">${XP[i].label}</button>`).join("")}</div>
       <div class="card xfer krule" id="kxfer" data-flow="none" style="margin-top:6px"><div class="xsvg"><svg viewBox="0 0 900 250" role="img" aria-label="Signals flow from the inbound engine to a shared board, and on to the outbound engineer only when a rule says so.">${XSVG}</svg></div><div class="xout" id="kxout"></div></div>`,
     mount() { KD.runX = (i) => { const x = XP[i].run(); $("#kxfer").dataset.flow = x.flow; $$("#kxch .chip").forEach((b) => b.setAttribute("aria-pressed", +b.dataset.v === i)); const o = $("#kxout"); o.innerHTML = `<b>${esc(x.t)}</b><p>${esc(x.p)}</p>`; o.style.animation = "none"; void o.offsetHeight; o.style.animation = ""; }; KD.runX(1); } },
-  { id: "whynow", hide: true, t: "Why now", mins: 1, notes: NOTE("Three stages: today, website launch, after launch. Click each one. The curve is an illustration of the shape, not measured data, and the slide says so.", "The point: the cheapest moment to build the process is before the first real enquiry, while no one is waiting.", "Do not claim any volume figure."),
+  { id: "whynow", hide: true, t: "Why now", mins: 1, notes: NOTE(),
     html: () => `<span class="kicker">Slide 2 · Why now</span><h2 class="dh">Build the process before the volume arrives.</h2><div class="stagebar" id="kstages">${WHYNOW.map(([a, b], i) => `<button data-kd="stage" data-v="${i}" aria-pressed="${i === 0}"><b>${a}</b><span>${b}</span></button>`).join("")}</div>
       <div class="two"><div class="card"><svg class="fig" viewBox="0 0 520 230" role="img" aria-label="Illustration: inbound volume rises after launch while the engine is already in place"><line x1="40" y1="190" x2="500" y2="190" stroke="var(--line)" stroke-width="2"/>
         <polyline class="ln" stroke="var(--accent)" points="60,176 260,118 460,38"/><polyline class="ln" stroke="var(--teal)" stroke-dasharray="2 9" points="60,62 460,62"/>
@@ -1919,7 +1919,7 @@ const DECK = [
         $$("#kstages button").forEach((b, k) => b.setAttribute("aria-pressed", k === i));
         $("#kmark").innerHTML = `<circle cx="${x}" cy="${y}" r="9" fill="var(--accent)" stroke="var(--bg)" stroke-width="3"/><line x1="${x}" y1="${y + 10}" x2="${x}" y2="190" stroke="var(--accent)" stroke-dasharray="3 4"/>`;
         $("#kwhy").innerHTML = `<span class="kicker" style="margin-bottom:10px">${WHYNOW[i][0]}</span><h3 style="font-size:22px">${WHYNOW[i][1]}</h3><p style="font-size:17px;margin:8px 0 14px">${WHYNOW[i][2]}</p><div class="notice" style="margin:0"><b>What the engine changes:</b> ${WHYNOW[i][3]}</div>`; }; KD.drawStage(); } },
-  { id: "who", t: "Why Propelon, and why now", mins: 2, notes: NOTE("Let me start with a puzzle. Most people say AI helps them. In a big McKinsey survey, 80% said it improved their own productivity. But only 37% of companies could trace any profit gain to AI. People feel it. Companies cannot prove it.", "Now the money. Gartner estimates the world will spend 2.6 trillion dollars on AI in 2026. And MIT's Project NANDA found that only 5 in every 100 company AI pilots get real value.", "So money goes in, and proof does not come out. That gap is where Propelon sits.", "Propelon is an early-stage company. It sells a management system for turning AI spending into real value, and it ends each AI project in a number the finance team will sign."),
+  { id: "who", t: "Why Propelon, and why now", mins: 2, notes: NOTE(),
     html: () => `<div class="s2"><div class="s2h"><span class="kicker">01 / The muse · Slide 2 · Who this is built for</span><h2 class="dh">AI spending is soaring. Proof of value is not.</h2></div>
       <div class="s2a">
         <div class="ft ft1"><span class="stl">The gap</span>
@@ -1943,7 +1943,7 @@ const DECK = [
       </div></div>`,
     mount() { const el = $("#cnt"); if (!el) return; if (reduce) { el.textContent = "2.6"; return; } const t0 = performance.now() + 1100, dur = 1400;
       const tick = (now) => { if (!document.body.contains(el)) return; const p = Math.max(0, Math.min(1, (now - t0) / dur)); el.textContent = (2.6 * (1 - Math.pow(1 - p, 3))).toFixed(1); if (p < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); } },
-  { id: "help", hide: true, t: "How it helps them", mins: 2, notes: NOTE("Pick a person, then watch which steps of the pipeline help them. Press Play to walk one enquiry through all seven steps.", "Land it on the last step: every one of the seven ends with a person pressing send.", "Each persona is a role, not a named individual."),
+  { id: "help", hide: true, t: "How it helps them", mins: 2, notes: NOTE(),
     html: () => `<span class="kicker">Slide 4 · How it helps them</span><h2 class="dh">Pick a person. See which steps help them.</h2><div class="persons" id="kpers">${PERS.map(([l, n], i) => `<button data-kd="pers" data-v="${i}" aria-pressed="${i === 0}"><i>${l}</i><b>${n}</b></button>`).join("")}</div>
       <div class="dgrid" style="margin-bottom:12px"><div class="flow3 bad" style="display:block"><li id="kpain" style="display:flex"></li></div><div class="flow3 ok" style="display:block"><li id="kgain" style="display:flex"></li></div></div>
       <div class="pipe" id="kpipe">${PIPE.map(([n], i) => `<button data-kd="pipe" data-v="${i}"><i>0${i + 1}</i>${n}</button>`).join("")}</div>
@@ -1952,7 +1952,7 @@ const DECK = [
         $("#kpain").innerHTML = `<i>BEFORE</i><span>${p[2]}</span>`; $("#kgain").innerHTML = `<i>WITH THE ENGINE</i><span>${p[3]}</span>`;
         $$("#kpipe button").forEach((b, k) => { b.classList.toggle("lit", p[4].includes(k)); b.classList.toggle("cur", k === KD.pipe); });
         $("#kpipedetail").innerHTML = KD.pipe < 0 ? `Select a step, or press Play. <b>${p[1]}</b> is helped by steps ${p[4].map((k) => k + 1).join(", ")}.` : `<b>${KD.pipe + 1}. ${PIPE[KD.pipe][0]}.</b> ${PIPE[KD.pipe][1]}${p[4].includes(KD.pipe) ? ` <span class="pill good">helps ${p[1]}</span>` : ""}`; }; KD.drawPers(); } },
-  { id: "worth", t: "Time saved", mins: 2, notes: NOTE("Here is a problem almost every company has. Studies of how fast companies answer web enquiries, including research in the Harvard Business Review, keep finding the same thing: most are slow. Published studies suggest the average first reply takes around 40 hours, and many enquiries never get one.", "Behind each reply is work: finding out who the company is, if they are a fit, and writing something good. By hand, that is roughly 15 to 45 minutes.", "Now follow the six boxes. A message arrives from the website form. It becomes a record in HubSpot. The engine researches the company. Rules decide who answers. The engine writes a draft and checks it is safe. All of that is automatic. Only the last box is a person, who reads, edits and sends.", "Try your own numbers on the sliders: enquiries a week, minutes saved on each. It is a what-if, not a measurement. The real figure will come from the first weeks of live enquiries."),
+  { id: "worth", t: "Time saved", mins: 2, notes: NOTE(),
     html: () => `<div class="s3x"><div class="s3h"><span class="kicker">02 / Why it matters · Slide 3 · Time saved</span><h2 class="dh">Most companies reply slowly. Here, a person only does the last step.</h2></div>
       <div class="t2">
         <div class="tt tt1"><span class="stl">How long a first reply takes</span>
@@ -1968,7 +1968,7 @@ const DECK = [
       <div class="wis"><b>What if…</b><label>enquiries a week <input type="range" id="wiN" min="1" max="50" value="10" aria-label="Enquiries a week"><output id="wiNo">10</output></label><label>minutes saved on each <input type="range" id="wiM" min="5" max="60" step="5" value="20" aria-label="Minutes saved on each enquiry"><output id="wiMo">20</output></label>
         <div class="wir">= <b id="wiH">3.3</b> hours a week back for the person who answers <small>Your own numbers, not a measurement.</small></div></div></div>`,
     mount() { const N = $("#wiN"), M = $("#wiM"); if (!N || !M) return; const up = () => { $("#wiNo").textContent = N.value; $("#wiMo").textContent = M.value; $("#wiH").textContent = (N.value * M.value / 60).toFixed(1); }; N.oninput = up; M.oninput = up; up(); } },
-  { id: "consist", t: "Consistency and value", mins: 1.5, notes: NOTE("Speed is half of it. The other half is that every answer is equally good. People can write in five ways: a demo request, an evaluation kit, an NDA, a contact form, or the board-question pages. The engine treats all five the same: the same deadline, the same approved wording, the same safety check. Whoever sends the reply, the quality is the same.", "Each reply also arrives with a short company summary, and what the sales team already knows, so the person can offer the right next step: the 30-minute executive briefing.", "The number Propelon cares about is on the right. 100% of enquiries get a drafted reply within one business day, or an alarm goes off. No request waits a day in a mailbox, and people spend their time on the conversation, not the first draft."),
+  { id: "consist", t: "Consistency and value", mins: 1.5, notes: NOTE(),
     html: () => `<div class="s3"><div class="s3h"><span class="kicker">02 / Why it matters · Slide 4 · Consistency and value</span><h2 class="dh">The same careful answer on every form, ready to move the lead forward.</h2></div>
       <div class="s3b s3c">
         <div class="vp vp2"><div class="pnh"><i class="pni"><svg class="ic"><use href="#i-shield"/></svg></i><span>Consistency gain</span></div><h3>One way of answering, on every form.</h3>
@@ -1984,7 +1984,7 @@ const DECK = [
           <p class="vtxt">People spend their time on the conversation, not on the first draft.</p></div>
       </div></div>`,
   },
-  { id: "value", t: "The reply clock", mins: 1, notes: NOTE("Every enquiry starts a clock. Give me a day and a time, and the engine tells us when the reply is due.", "Now a tricky one. A message arrives on a Friday evening. Propelon is closed, so the clock starts on Monday morning. The early warning goes off Monday at 1 and the reply is due Monday at 5. Weekends and holidays do not count, and nobody gets a surprise."),
+  { id: "value", t: "The reply clock", mins: 1, notes: NOTE(),
     html: () => `<div class="ck"><div class="s3h"><span class="kicker">02 / Why it matters · Slide 5 · The reply clock</span><h2 class="dh">Every enquiry starts a clock. Pick when it arrives.</h2></div>
       <div class="ckb">
         <div class="ckl"><span class="stl">1 · When does it arrive?</span>
@@ -2008,7 +2008,7 @@ const DECK = [
           + `<rect x="${st}" y="40" width="${Math.max(du - st, 3)}" height="8" rx="4" fill="#2E8B6F" opacity=".75"/><circle cx="${a}" cy="44" r="8" fill="#EE7614" stroke="#fff" stroke-width="2"/><circle cx="${al}" cy="44" r="7" fill="#F6A73C" stroke="#fff" stroke-width="2"/><circle cx="${du}" cy="44" r="9" fill="#5CC999" stroke="#fff" stroke-width="2"/>`
           + `<text x="${Math.min(a, 930)}" y="68" text-anchor="start" style="fill:#EE7614;font:800 14px var(--sans)">arrives</text><text x="${Math.min(Math.max(al, 40), 960)}" y="81" text-anchor="middle" style="fill:#F6A73C;font:800 14px var(--sans)">warning</text><text x="${Math.min(Math.max(du, a + 150), 975)}" y="68" text-anchor="end" style="fill:#5CC999;font:800 14px var(--sans)">reply due</text>`; };
       KD.drawClock = draw; draw(); } },
-  { id: "ba", t: "Before and after", mins: 1.5, notes: NOTE("Let me show the change. First, Before. A message lands in a shared inbox. Someone reads it when they have time and guesses if the sender is a real buyer. Then they write a reply from scratch. There is no deadline, and nobody records why. So the people who read the messages at Propelon start from nothing, the outbound team finds out late, and the person who wrote in waits with no promise.", "Now, After. Every message is matched to a company and sent to the right person by clear rules. It lands in HubSpot with a ready-made reply, a short summary and a deadline of one business day. If anything runs late, an alarm goes off. A person always reads, edits and sends.", "So the people who read the messages start from a draft, the outbound team hears the same day and never pitches a company twice, and the person who wrote in gets a quick, accurate reply."),
+  { id: "ba", t: "Before and after", mins: 1.5, notes: NOTE(),
     html: () => `<div class="sx"><div class="s3h"><span class="kicker">03 / The delta · Slide 6</span><h2 class="dh">From a message that waits to a reply that is ready.</h2></div>
       <div class="bax before" id="bax"><div class="batg" role="group" aria-label="Before or after"><button class="bb" data-kd="ba" data-v="before" aria-pressed="true">Before</button><button class="ba" data-kd="ba" data-v="after" aria-pressed="false">After</button></div>
         <div class="bapr" id="bapr"></div><div class="bast" id="bast"></div></div>
@@ -2022,7 +2022,7 @@ const DECK = [
         $("#bapr").style.setProperty("--n", PROC[s].length); $("#bapr").innerHTML = PROC[s].map((x, i) => `<div class="bps" style="--i:${i}"><i>${i + 1}</i><span>${x}</span></div>`).join("");
         $("#bast").innerHTML = WHOM[s].map(([n, ic, d, tag], i) => `<div class="bsc" style="--i:${i}"><div class="pnh"><i class="pni"><svg class="ic"><use href="#${ic}"/></svg></i></div><h3>${n}</h3><p>${d}</p><em>${tag}</em></div>`).join("");
         $("#babar").innerHTML = BAR[s]; }; KD.drawBA(); } },
-  { id: "proof", hide: true, t: "The proof, in pictures", mins: 1.5, notes: NOTE("Every figure here is counted from the repository or from the eight scenarios run through the real engine. Nothing is estimated.", "Click a slice of the ring to see which scenarios sit in that lane. The bar underneath shows when the engine drafts, when it steps back for a person, and when it does nothing.", "Pick any of them and watch the engine decide."),
+  { id: "proof", hide: true, t: "The proof, in pictures", mins: 1.5, notes: NOTE(),
     html: () => `<span class="kicker">Slide 7 · Proof</span><h2 class="dh">What the engine did with eight different enquiries.</h2>
       <div class="two"><div class="card"><span class="eyebrow">Eight scenarios by lane · click a slice</span><div style="display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:center"><svg class="fig" viewBox="0 0 200 200" id="kdonut" role="img" aria-label="Scenarios by lane"></svg><div class="legend" id="klegend"></div></div><div class="pdetail" id="kseg" style="margin-top:12px;min-height:52px;font-size:15.5px;padding:14px 18px">Select a lane to see its scenarios.</div></div>
       <div class="card"><span class="eyebrow">What happened to each one</span><svg class="fig" viewBox="0 0 520 70" id="kout3" role="img" aria-label="Outcomes"></svg><div class="legend" id="kout3l"></div></div></div>`,
@@ -2036,7 +2036,7 @@ const DECK = [
       $("#kout3").innerHTML = oc.filter((o) => o[1]).map(([l, n, c]) => { const w = n / sc.length * 520, r = `<rect x="${x}" y="8" width="${Math.max(w - 3, 1)}" height="42" rx="8" fill="${c}"><animate attributeName="width" from="0" to="${Math.max(w - 3, 1)}" dur=".7s" fill="freeze"/></rect><text x="${x + w / 2}" y="35" text-anchor="middle" style="fill:#fff;font-weight:800;font-size:18px">${n}</text>`; x += w; return r; }).join("");
       $("#kout3l").innerHTML = oc.map(([l, n, c]) => `<div style="display:flex;gap:10px;align-items:center;font-size:14.5px"><i style="width:12px;height:12px;border-radius:4px;background:${c}"></i>${l}<b style="margin-left:auto">${n}</b></div>`).join("");
     } },
-  { id: "input", t: "The unfair input", mins: 2, notes: NOTE("Here is the question I ask about any AI project: could another company, or a competitor, get the same inputs? If yes, the build is fragile. If no, name what they cannot get.", "Propelon's own messages: only Propelon receives them. The sales team's priority list: only Propelon's outbound team keeps it. And the strongest one is computed, not found: the edit record. Every draft the engine writes is kept next to the version the person records as sent. It is made by running the engine, so it cannot be found or bought.", "Together they let a reply know the account. Better prompts cannot save you. Better models cannot save you. Inputs nobody else can get can save you."),
+  { id: "input", t: "The unfair input", mins: 2, notes: NOTE(),
     html: () => `<div class="sx"><div class="s3h"><span class="kicker">04 / The unfair input · Slide 7</span><h2 class="dh">Could another company or competitor get the same inputs? No.</h2></div>
       <div class="un2">
         <div class="unr2" id="kinputs">${[["found", "Propelon's own messages", "Every message from the website forms, the moment it arrives.", "Only Propelon receives them, through its own forms and mailboxes."], ["found", "The sales team's priority list", "The companies Propelon's outbound team is already chasing.", "Only Propelon's outbound team keeps it."], ["computed", "The edit record", "Every draft, kept next to the version the person records as sent.", "It is made by running the engine: each draft is saved next to the version the person records as sent."]].map(([k, t, d, why], i) => `<button class="inp ${k}" data-kd="input" data-v="${i}" aria-pressed="false" style="--i:${i}"><em class="tg">${k === "computed" ? "Computed, not found" : "Access only Propelon has"}</em><i>${i + 1}</i><b>${t}</b><span>${d}</span><small><u>Why nobody else can get it</u>${why}</small></button>`).join("")}</div>
@@ -2044,14 +2044,14 @@ const DECK = [
       </div>
       <div class="ckbar">Better prompts can't save you. Better models can't save you. <b>Inputs nobody else can get can save you.</b></div></div>`,
     mount() { KD.input = -1; } },
-  { id: "stack", t: "The stack", mins: 1.5, notes: NOTE("Seven tools, in the order a message travels through them. Python and simple rule files make the decisions, and the rules sit in plain files Propelon can read and change. HubSpot records everything: one ticket per message and a task due the next business day. GitHub Actions runs the engine on its own every 4 hours.", "The visitor-matching tool, {{identification|the visitor-matching tool}}, spots which company is visiting the website. The research tool, {{research|the research tool}}, builds the company research file. The footprint tool, {{footprint|the footprint tool}}, adds optional context.", "And one more, which I want you to notice. {{rewriting|The AI writing tool}} is used only as a second opinion. It can suggest a gentler wording for the draft the engine already built. The engine I built stays in charge, and a suggestion is used only if it passes every rule."),
+  { id: "stack", t: "The stack", mins: 1.5, notes: NOTE(),
     html: () => `<div class="sx nb"><div class="s3h"><span class="kicker">05 / The stack · Slide 8</span><h2 class="dh">Every tool I used, and why.</h2></div>
       <div class="stg"><div class="sgh"><span>Tool</span><span>How I used it</span><span>Why I chose it</span></div>
         ${STACK.map(([n, k, how, why], i) => `<div class="sgr${i === STACK.length - 1 ? " hl" : ""}" style="--i:${i}"><b><i>${i + 1}</i>${n}${k ? tool(k) : ""}</b><span>${how}</span><span>${why}</span></div>`).join("")}</div></div>`,
   },
-  { id: "arch", hide: true, t: "Architecture", mins: 1.5, notes: NOTE("Read it left to right: intake, the record, the decision engine, the guards, the people. Point at the dark column: this is where the decisions are made, in rules and code, not by a model.", "Name the tool behind each label if the room asks. Stress two things: HubSpot only holds the record, and no part of this can send a message.", "Walk one enquiry through: form, scheduled run, match and route, clock, draft, claims screen, ticket and task, a person sends. If a step fails, it is flagged for a manual draft instead of being dropped."),
+  { id: "arch", hide: true, t: "Architecture", mins: 1.5, notes: NOTE(),
     html: () => `<span class="kicker">Slide 7 · Architecture</span><h2 class="dh">How it fits together, and what runs where.</h2><p class="dsub">One enquiry flows left to right. Nothing in this picture can send a message.</p>${archHTML(false)}` },
-  { id: "break", t: "Break it. Show it.", mins: 2, notes: NOTE("Now it is your turn. This is a real draft reply. Try to make it say something it should not.", "I just added a line claiming a security certification Propelon does not hold. The safety filter marks that exact sentence and blocks the whole draft. Prices, promises and features that are not built yet are blocked the same way. Every reply passes this check before it is saved.", "It is not a blocker for everything. A true statement is allowed. The approved wording is: We do not hold a SOC 2 report today.", "Now the other rule. The engine scores companies, never people. If I attach a person's e-mail to a signal, the engine refuses the whole batch. If you find a gap, I want to hear it. That is what this is for."),
+  { id: "break", t: "Break it. Show it.", mins: 2, notes: NOTE(),
     html: () => `<div class="sx"><div class="s3h"><span class="kicker">06 / Proof it holds · Slide 9</span><h2 class="dh">Try to make it say something it should not.</h2></div>
       <div class="bk2">
         <div class="sp o"><div class="pnh"><i class="pni"><svg class="ic"><use href="#i-mail"/></svg></i><span>The draft reply · you can edit it</span></div><textarea class="draftbox" id="kdraft" spellcheck="false"></textarea><div class="chips" id="kchips"></div></div>
@@ -2059,30 +2059,30 @@ const DECK = [
       </div>
       <div class="bk3"><div><b>Break the data rule too.</b> The engine scores companies, never people.</div><button class="btn" data-kd="person" style="border-color:var(--bad);color:var(--bad)">Attach a person's e-mail to a signal</button><div id="kref"></div></div></div>`,
     mount() { $("#kdraft").value = withDraft[0].draft; $("#kchips").innerHTML = SNEAK.map(([l], i) => `<button class="cchip" data-kd="sneak" data-v="${i}">${l}</button>`).join("") + `<button class="cchip safe" data-kd="sneak" data-v="safe">Approved certification statement</button><button class="cchip" data-kd="reset">Reset draft</button>`; $("#kdraft").oninput = KD.check; KD.check(); } },
-  { id: "feedback", hide: true, t: "Feedback, sorted", mins: 2, notes: NOTE("The school's rule: aesthetic feedback you ignore at this stage, interpretation you fix by reframing, fundamental feedback you engage with seriously: change the project, or push back with a real argument.", "Start on fundamental: five items. Four changed the project and one I answered with a reason. Be candid that every item came from Propelon's CCO or a reviewer, because no real customer has used it yet."),
+  { id: "feedback", hide: true, t: "Feedback, sorted", mins: 2, notes: NOTE(),
     html: () => `<div class="sx nb"><div class="s3h"><span class="kicker">06 / Proof it holds · Slide 10</span><h2 class="dh">What I changed, and what I pushed back on.</h2></div>
       <div class="fb2"><div class="fbt3" id="kfilt"></div><div id="kfb"></div><p class="ckn" id="ktally"></p></div></div>`,
     mount() { KD.fb = "fundamental"; const cats = [["fundamental", "Fundamental", "They don't think this should exist.", "Engage seriously. Change the project, or push back."], ["interpretation", "Interpretation", "They don't understand what they see.", "Fix the framing."], ["aesthetic", "Aesthetic", "Looks or wording feel off.", "Ignore at this stage."]];
       const draw = () => { $("#kfilt").innerHTML = cats.map(([k, l, d, w], i) => `<button class="fbt ${k}" data-kd="fb" data-v="${k}" aria-pressed="${k === KD.fb}" style="--i:${i}"><b>${FB.filter((f) => f[0] === k).length}</b><span><em>${l}</em>${d}<small>${w}</small></span></button>`).join("");
         $("#kfb").innerHTML = FB.filter((f) => f[0] === KD.fb).map(([c, w, said, did, why]) => `<div class="fbr" title="${esc(why)}"><span class="pill ${c === "fundamental" ? "bad" : c === "interpretation" ? "amber" : ""}">${w}</span><b>${esc(said)}</b><span class="pill ${did.startsWith("Pushed") ? "teal" : "good"}">${did}</span></div>`).join("");
         $("#ktally").textContent = "9 pieces of feedback, from Propelon's CCO and reviewers. No real customer has used it yet, so none came from one."; }; KD.drawFB = draw; draw(); } },
-  { id: "harden", hide: true, t: "Hardening", mins: 2, notes: NOTE("Hardening is not polish. It means the workflow survives the worst input. Four questions: odd or broken input, what happens when the checker fails, what breaks first, and what I cannot fix yet. Answer each one honestly.", "Press the button on the first card to show the refusal of person-level data. On the last card, say that nobody has used the engine for real yet, and that this is the main risk."),
+  { id: "harden", hide: true, t: "Hardening", mins: 2, notes: NOTE(),
     html: () => `<div class="sx nb"><div class="s3h"><span class="kicker">06 / Proof it holds · Slide 11</span><h2 class="dh">What could go wrong, and what I can't fix yet.</h2></div>
       <div class="hd4">${HARD.map(([n, short, more, demo], i) => `<div class="sp ${i === HARD.length - 1 ? "hl" : i % 2 ? "b" : "o"}" style="--i:${i}"><div class="pnh"><i class="pni">${i + 1}</i><span>${n}</span></div><h3>${short}</h3><p>${esc(more)}</p>${demo ? `<button class="btn small" data-kd="person" style="border-color:var(--bad);color:var(--bad);align-self:flex-start">Attach a person's e-mail to a signal</button><div id="kref2"></div>` : ""}</div>`).join("")}</div></div>`,
   },
-  { id: "own", hide: true, t: "Ownership", mins: 1.5, notes: NOTE("Day 1, 30, 90 and 365: who owns it at each point. This is my proposal and has not yet been confirmed with Propelon, so say so.", "Land the honest insight: if nobody owns it, the engine quietly stops preparing drafts. It never sends anything, so nobody would notice, and the late-reply alarm is the only warning."),
+  { id: "own", hide: true, t: "Ownership", mins: 1.5, notes: NOTE(),
     html: () => `<div class="sx"><div class="s3h"><span class="kicker">07 / What comes next · Slide 12</span><h2 class="dh">Who owns it, at each point in time.</h2></div>
       <div class="ow4">${OWN.map(([d, w, x], i) => `<div class="owc" style="--i:${i}"><i class="owd">${d}</i><div class="sp ${i === 0 ? "o" : i === 3 ? "hl" : "b"}"><h3>${w}</h3><p>${x}</p></div></div>`).join("")}</div>
       <div class="ckbar"><b>If nobody owns it,</b> the engine quietly stops preparing drafts. It never sends anything, so nobody would notice, and the late-reply alarm is the only warning. <span>This plan is my proposal; the CCO still has to confirm it.</span></div></div>`,
   },
-  { id: "loop", hide: true, t: "Open or closed loop", mins: 1.5, notes: NOTE("Today the engine saves each draft next to the version that was sent, but does not yet learn from it. That is an open loop with the first half captured.", "The closed loop is a small change: each month find the template people change most, rewrite it with approval, update the rule file, and measure whether fewer drafts needed changes. The one number to watch is how many drafts are sent without changes."),
+  { id: "loop", hide: true, t: "Open or closed loop", mins: 1.5, notes: NOTE(),
     html: () => `<div class="sx"><div class="s3h"><span class="kicker">07 / What comes next · Slide 13</span><h2 class="dh">One number closes the loop.</h2></div>
       <div class="lp5"><div class="lpst"><span class="stl">Today</span><b>Open loop, half captured</b><span>The engine saves each draft and the version that was sent, but does not yet learn from them.</span></div>
         <div class="lpc">${LOOP.map(([t, b], i) => `<div class="lps${i === 0 ? " done" : ""}" style="--i:${i}"><i>${i + 1}</i><b>${t}</b><span>${b}</span><em>${i === 0 ? "Built" : "Next"}</em></div>`).join("")}</div>
         <svg class="lpb" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true"><path class="flowp" d="M960 4 V40 H40 V12"/><path d="M30 20 L40 8 L50 20" fill="none" stroke="#EE7614" stroke-width="3"/></svg></div>
       <div class="ckbar"><b>The one number to watch:</b> how many drafts are sent without changes. <span>Later: which companies booked a briefing after showing interest. That needs real enquiries.</span></div></div>`,
   },
-  { id: "plan", hide: true, t: "The 90-day plan", mins: 1.5, notes: NOTE("Read this as three short answers, then stop: who runs it, what breaks first, and how it learns. It is deliberately honest and ends with the legitimate option to retire the system."),
+  { id: "plan", hide: true, t: "The 90-day plan", mins: 1.5, notes: NOTE(),
     html: () => `<div class="sx"><div class="s3h"><span class="kicker">07 / What comes next · Slide 14</span><h2 class="dh">If I kept this alive for 90 days.</h2></div>
       <div class="pl3">
         <div class="sp o"><div class="pnh"><i class="pni"><svg class="ic"><use href="#i-user"/></svg></i><span>Ownership</span></div><h3>Propelon runs it.</h3><ul class="bu"><li>Its CCO runs it.</li><li>Its own account holds the code.</li><li>One named person fixes it when it breaks.</li></ul></div>
@@ -2091,12 +2091,12 @@ const DECK = [
       </div>
       <div class="ckbar"><b>If it does not earn its keep,</b> the honest ending is to retire it and answer by hand.</div></div>`,
   },
-  { id: "score", hide: true, t: "Where I would mark myself", mins: 1.5, notes: NOTE("Give your own marks, then hand the last one to the room. The scores are my reading and the sliders are live, so if someone challenges one, move it.", "Communication is theirs to judge after the presentation."),
+  { id: "score", hide: true, t: "Where I would mark myself", mins: 1.5, notes: NOTE(),
     html: () => `<div class="sx nb"><div class="s3h"><span class="kicker">08 / Self-check · Slide 15</span><h2 class="dh">Where I would mark myself, honestly.</h2></div>
       <div class="rb4" id="krub"></div></div>`,
     mount() { const draw = () => { $("#krub").innerHTML = RUB.map(([n, q, v, why], i) => `<div class="rbc" style="--i:${i}"><div class="rbh"><b>${n}</b><output id="kro${i}">${RUB[i][2]}</output></div><small>${q}</small><input type="range" min="1" max="5" value="${RUB[i][2]}" data-kd="rub" data-v="${i}" aria-label="${n} score"><p>${why}</p></div>`).join("") + `<div class="rbc avg"><b>Average so far</b><div id="kavg"></div><small>Drag any slider. Communication is yours to judge.</small></div>`; upd(); };
       const upd = () => { const avg = RUB.reduce((s, r) => s + r[2], 0) / RUB.length; $("#kavg").innerHTML = `<strong>${avg.toFixed(1)}</strong> / 5`; }; KD.rubUpd = (i) => { $("#kro" + i).textContent = RUB[i][2]; upd(); }; draw(); } },
-  { id: "more", t: "What more could be done", mins: 1, notes: NOTE("Everything until now works today. This is what I would add next to the engine itself. None of it is switched on.", "Make it learn: every edit a person makes is a lesson. Each month, review the edits and improve the template people change most. Record what was sent automatically so nobody pastes it. Then watch how many drafts go out unchanged, and see it rise."),
+  { id: "more", t: "What more could be done", mins: 1, notes: NOTE(),
     html: () => `<div class="sx"><div class="s3h"><span class="kicker">07 / What comes next · Slide 11</span><h2 class="dh">Make it learn: use every edit.</h2></div>
       <div class="lp">
         <div class="lr">
@@ -2111,7 +2111,7 @@ const DECK = [
       </div>
       <div class="ckbar"><b>None of this is switched on today.</b></div></div>`,
   },
-  { id: "future2", t: "Where Propelon can go next", mins: 1.5, notes: NOTE("This slide is bigger than my project. It is where the same engine could help Propelon go further. These are ideas. None is built.", "Speed to lead: for the best-fit companies, alert Propelon's CCO straight away and put two proposed meeting times in the draft. A person still sends it.", "Help outbound: tell the outbound team which question or page brought a company in, so the first message starts there."),
+  { id: "future2", t: "Where Propelon can go next", mins: 1.5, notes: NOTE(),
     html: () => `<div class="sx"><div class="s3h"><span class="kicker">07 / What comes next · Slide 12</span><h2 class="dh">Where Propelon can go next: faster and sharper.</h2></div>
       <div class="pl2">
         <div class="sp o"><div class="pnh"><i class="pni">1</i><span>Speed to lead</span></div><h3>From one business day to the same hour, for the best fits.</h3><ul class="bu"><li>Alert Propelon's CCO the moment a target-account company writes in.</li><li>Put two proposed meeting times in the draft, filled from the CCO's calendar. A person still sends.</li><li>Keep the one-business-day promise for everyone else.</li></ul></div>
@@ -2119,7 +2119,7 @@ const DECK = [
       </div>
       <div class="ckbar"><b>Ideas for Propelon going forward.</b> None is built.</div></div>`,
   },
-  { id: "close", t: "Close", mins: 0.5, notes: NOTE("The story in one breath. The problem: AI spending soars, but proof lags. What I built: an engine that matches, researches, routes and drafts a reply for every enquiry, and checks it is safe. The impact: no reply waits more than a day, and a person always presses send.", "Thank you. The full case study is one click away if you want to go deeper."),
+  { id: "close", t: "Close", mins: 0.5, notes: NOTE(),
     html: () => `<div class="sx"><div class="s3h"><span class="kicker">The story in one breath · Slide 16</span><h2 class="dh">AI spending soars. Proof lags. Every reply can still be ready.</h2></div>
       <div class="cl3"><div class="sp o"><div class="pnh"><i class="pni">1</i><span>The problem</span></div><h3>Proof of value lags.</h3><p>Companies spend on AI but few can show what it returned. Propelon sells the way to prove it.</p></div>
         <div class="sp b"><div class="pnh"><i class="pni">2</i><span>What I built</span></div><h3>An engine for every enquiry.</h3><p>Each message is matched, researched, routed and drafted. A person only reviews and sends.</p></div>
@@ -2127,11 +2127,11 @@ const DECK = [
       <div class="cl4">
         <div class="row"><button class="btn primary" data-dk="explore">Open the full case study</button>${P.email ? `<a class="btn" href="mailto:${esc(P.email)}">Email me</a>` : ""}${(P.links || []).map((l) => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} →</a>`).join("")}</div></div></div>`,
   },
-  { id: "next", hide: true, t: "What comes next", mins: 1, notes: NOTE("Three months, three decisions. Keep it to one breath each: make it hold, close the loop, then decide with real data.", "End on the honest option: if it does not earn its keep, the right answer may be to retire the engine and answer by hand. Saying that is a strength, not a weakness."),
+  { id: "next", hide: true, t: "What comes next", mins: 1, notes: NOTE(),
     html: () => `<span class="kicker">Slide 11 · What comes next</span><h2 class="dh">${words("Three months to earn the right to scale it.")}</h2>
       <div class="tl3">${NEXT.map(([t, p], i) => `<div class="st" style="--i:${i};--c:${["var(--v-mod)", "var(--v-com)", "var(--v-rea)"][i]}"><i>${i + 1}</i><b>${t}</b><p>${p}</p></div>`).join("")}</div>
       <p class="dsub" style="margin:22px 0 0">If it does not earn its keep, <b>the honest end is to retire it and answer by hand.</b></p>` },
-  { id: "ask", dark: true, hide: true, t: "What I would bring", mins: 1, notes: NOTE("Close on what this project says about how I work, in three lines: I frame unclear briefs, I build guardrails first, and I say what is unproven.", "Then the ask: a conversation about where this way of working would help the team. Open it up for questions; the full case study is one click away."),
+  { id: "ask", dark: true, hide: true, t: "What I would bring", mins: 1, notes: NOTE(),
     html: () => `<span class="kicker">Slide 12 · What I would bring</span><h2 class="dh">${words("From one first reply to the whole front door.")}</h2>
       <div class="dgrid g3c" style="margin-top:14px">${BRING.map(([t, p]) => `<div class="card krule"><h3>${t}</h3><p>${p}</p></div>`).join("")}</div>
       <div class="row" style="margin-top:26px"><button class="btn primary" data-dk="explore">Open the full case study</button>${P.email ? `<a class="btn" href="mailto:${esc(P.email)}">Email me</a>` : ""}${(P.links || []).map((l) => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} →</a>`).join("")}</div>
