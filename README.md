@@ -3,4 +3,3 @@
 Capstone case study and presentation.
 
 - Open `index.html` (hosted page) for the interactive case study and the Present mode.
-- `Propelon-Inbound-Engine-Presentation.pptx` is the same deck as a PowerPoint file.
